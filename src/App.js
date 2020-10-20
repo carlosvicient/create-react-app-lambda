@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import netlifyIdentity from "netlify-identity-widget"
+
 import logo from "./logo.svg"
 import "./App.css"
 
@@ -74,6 +76,13 @@ class SlackMessage extends Component {
 }
 
 class App extends Component {
+  componentDidMount() {
+    netlifyIdentity.init();
+  }
+  handleIdentity = (e) => {
+    e.preventDefault();
+    netlifyIdentity.open();
+  }
   render() {
     return (
       <div className="App">
@@ -83,6 +92,7 @@ class App extends Component {
             Edit <code>src/App.js</code> and save to reload.
           </p>
           <LambdaDemo />
+          <p><a href="#" onClick={this.handleIdentity}>User Status</a></p>
           <SlackMessage/>
         </header>
       </div>
